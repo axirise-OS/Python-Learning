@@ -1,4 +1,4 @@
-
+  
 # Exercise 1 Rectangle Area calc
 #lenght = float(input("What is the lenght?: "))
 #width = float(input("What is the width?: "))
@@ -607,3 +607,244 @@ for question in questions:
 
 score = (score / len(questions)) * 100
 print(f"Your score is: {score}%")
+
+#=======================
+# day-5
+#dictionary = collection of (key : value) ordered and changeable and no duplicat 
+
+price = {"pizza": 10.99 , "Rice" : 2.99 , "banana" : 5.99}
+print(dir(price))
+print(help(price))
+price.pop("banana")#------- remove the first item
+price.popitem()#------- remove the latest item
+price.clear()
+print(price.update({"Rice" : 2.22}))
+print(price.get("pizza"))
+print(price.keys(price))
+print(price.values(price))
+print(price.items())
+
+# Concession stand programe
+
+concessions = {"pupcorn": "1.00" ,
+               "hot dog": "2.00" ,
+               "giant pretzel": "3.00" ,
+               "asst candy": "4.00" ,
+               "soda": "5.00" ,
+               "bottled water": "6.00" ,}
+price = 0
+while True:
+ person_want = input("Enter (Menu , Food)(Q to quit)?: ").lower()
+ if person_want == "menu":
+    for key , value in concessions.items():
+     print(f"the Menu is: {key} : ${value}")
+
+ elif person_want == "food":
+   food = input("search about: ")
+   if concessions.get(food):
+     print(f"the price is: {concessions.get(food)}")
+   else:
+     print("the food dosn`t exiect")
+            
+ elif person_want == "q":
+   break
+   
+# Concession stand programe v.22
+
+menu = {"pupcorn": 1.00 ,
+        "hot dog": 2.00 ,
+        "giant pretzel": 3.00 ,
+        "asst candy": 4.00 ,
+        "soda": 5.00 ,
+        "bottled water": 6.00 ,}
+card =[]
+total = 0
+print("----------the menu----------")
+for keys , values in menu.items():
+   print(f"{keys:15} : ${values:.2f}")
+print("----------------------------")
+while True:
+   food = input("What food You like to buy?(Q to Quit and B to Buy): ").lower()
+   if menu.get(food):
+    card.append(food)
+    total = total + menu.get(food)
+   else:
+    if food == "b":
+     print(f"you have buy: {card}")
+     print(f"The total price is: {total:.2f}")
+    elif food == "q":
+      break
+    else:
+      print("this food dosen`t found !!")
+
+# import random
+import random
+low = 0 
+high = 100
+card = ["1","2","3","4","5","6","7","8"]
+num_int = random.randint(low,high)
+num_float0_1 = random.random()
+option = random.choice(card)
+numper = random.shuffle(card)
+
+print(num_int)
+print(num_float0_1)
+print(option)
+print(card)
+
+#numper gussing game
+import random
+
+low = int(input("Enter the low num: "))
+high = int(input("Enter the high num: "))
+running = True
+numper = random.randint(low, high)
+while running:
+ guess = int(input(f"Enter numper bettwen {low} : {high} (q to quit): "))
+ if guess == numper:
+    print("the guess is right!!")
+    running = False
+ elif guess > numper:
+   print(f"The numper is less then {guess}")
+ elif guess < numper:
+   print(f"The numper is more then {guess}")
+
+# function
+def hello_world():
+   print("hello world")
+hello_world()
+
+# day-6
+#mathc case (switch)
+def days_week(day):
+ match day:
+    case 1:
+       return "saterday"
+    case 2:
+       return "sunday"
+    case 3:
+       return "monday"
+    case 4:
+       return "Tuesday"
+    case 5:
+       return "Wednesday"
+    case 6:
+       return "Thursday"
+    case 7:
+       return "Firday"  
+    case _:
+       return "It`s not a day"
+days_week(1)
+days_week(2)
+days_week(3)
+days_week(4)
+days_week(5)
+days_week(6)
+days_week(7)
+
+# import module ---------- a file containing code u want to use 
+# it can be build-in or your own
+# print(help(module)) 
+
+#variable scope
+#scope resolution = (LEGB) Local -> Enclosed -> Global -> Built-in
+
+
+#if _name_ == "_main_"
+
+#python Banking program
+Balance = 0
+amount = 0.0
+is_runing = True
+def Banking_program():
+   print("-------Banking program---------")
+   print("1. Show Balance")
+   print("2. Enter money")
+   print("3. Exit")
+   print("-------------------------------")
+
+def User_input():
+   while True:
+    User_input = int(input("Enter your choice: "))
+    if User_input == 1 or User_input == 2 or User_input == 3 :
+       User_input_x = User_input
+       break
+   return User_input_x
+
+def Case_X(User_input_x): 
+   match User_input_x:
+     case 1:
+       global Balance
+       print(f"You have ${Balance} in your Balance: ")
+     case 2:
+      while True:
+       money_x = float(input("Enter the money u like to add to your Balance: "))
+       if money_x:
+        Balance += money_x
+        break    
+     case 3:
+       global is_runing  
+       is_raning = False
+
+while is_runing:
+  Banking_program()
+  CHOICE = User_input()
+  Case_X(CHOICE)
+      
+# python Slot machine
+#  ☠️👻👽☀️🏡❄️
+import random
+
+def try_again():
+  is_runing = True
+  while is_runing:
+   try_again = input("Do u wanna spin again (Y & N)?: ").upper()
+   if try_again == "Y":
+     is_runing = False
+     return try_again
+   elif try_again == "N":
+     is_runing = False
+     return try_again
+
+def slot_machine(spin):
+ slots = ("☠️", "👻", "👽", "☀️", "🏡", "❄️")
+ for i in range(0, spin):
+   index = random.randint(0 , 6)
+   return slots[index]
+
+def Balance():
+   money = 100
+   is_running = True
+   time_spining = 0
+   while is_running:
+    
+    spining = int(input("how many spining you like to spin?: "))
+    if spining > 0 and spining <= money:
+      money -= spining
+      time_spining = spining
+      is_running = False
+      return time_spining
+    else:
+      print(f"Enter nume betwen (1 : {money})")
+
+def main():
+ is_running = True
+ while is_running:
+   spin = Balance()
+   slot1 = slot_machine(spin)
+   slot2 = slot_machine(spin)
+   slot3 = slot_machine(spin)
+   print("----Slot machine-----")
+   print(f" {slot1} | {slot2} | {slot3} ")
+   print("---------------------")
+
+   if slot1 == slot2 == slot3:
+     print("You have won!!")
+     if try_again() == "N":
+       is_running = False
+   else:
+     print("you lost this round")
+     if try_again() == "N":
+       is_running = False
+
+main()
