@@ -1550,3 +1550,131 @@ else:
 
 # python writing files (.txt , .json , .csv)
 # tomorrow
+
+#day - 11
+# python writing files (.txt , .json , .csv)
+import os
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.txt"
+file_data = "My name is Axirise"
+file_data2 = ["I`m programer", "I learning python", "I like Pizza"]
+with open(file_path, "w") as file:
+   file.write(file_data + "\n")
+   for data in file_data2:
+      file.write(data + "\n")
+   print("file.txt created is finished 👻")
+
+import json
+json_file = {
+   "name" : "Axirise",
+   "age" : "XX",
+   "job" : "programer"
+}
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.json"
+with open(file_path, "w") as file:
+   json.dump(json_file, file, indent= 4)
+   print("file.json created is finished 👻")
+
+import csv
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.csv"
+csv_file = [["name","ID","job"],
+            ["Axirise","3300","prgramer"],
+            ["Rodjy", "3301", "programer"],
+            ["Wassy","3302", "prgramer"]]
+with open(file_path, "w") as file:
+   writer = csv.writer(file)
+   for row in csv_file:
+      writer.writerows(row)
+   print("file.csv created is finished 👻")
+
+# python reading files (.txt , .json , .csv)
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.txt"
+with open(file_path, "r") as file:
+   contant = file.read(file)
+   print(contant)
+
+import json
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.json"
+with open(file_path, "r") as file:
+   contant = json.load(file)
+   print(contant["name"])
+
+import csv
+file_path = "C:\\Users\\Axiri\\Developer\\Python-Learning\\day-11\\writing-files.csv"
+with open(file_path, "r") as file:
+   contant = csv.reader(file)
+   for line in contant:
+      print(line[0])
+
+# python datetime 
+import datetime
+date = datetime.date(2026 , 7 , 19)
+today = datetime.date.today()
+time = datetime.time(9 , 5 ,1)
+now = datetime.datetime.now()
+now = now.strftime("%H : %M : %S --- %m - %d - %y")
+print(now)
+target_date = datetime.datetime(2026, 8, 1, 00, 00, 00)
+current_date = datetime.datetime.now()
+if target_date < current_date : 
+   print("target date has passed") 
+else:
+   print("target date has not passed")
+
+# python Alarm Clock
+# i understand the idea
+
+#day - 12
+# multithreading
+import threading
+import time
+
+def Go_sleep(Name, age):
+   time.sleep(3)
+   print(f"You have went to sleep {Name} and your age is {age}")
+def Go_shoping(item):
+   time.sleep(3)
+   print(f"You have went to shoping {item}")
+def Go_GYM():
+   time.sleep(3)
+   print("You have went to GYM")
+
+chore1 = threading.Thread(target= Go_sleep, args=("Axirise", "XX"))
+chore1.start()
+chore2 = threading.Thread(target= Go_shoping, args=("meat",))
+chore2.start()
+chore3 = threading.Thread(target= Go_GYM,)
+chore3.start()
+
+chore1.join()
+chore2.join()
+chore3.join()
+
+print("all chores are completed")
+
+# request API data
+import requests
+pokeAPI = "https://pokeapi.co/api/v2/"
+def Get_poke_info(poke_name):
+   url = f"{pokeAPI}/pokemon/{poke_name}"
+   response = requests.get(url)
+   if response.status_code == 200:
+      print("We get respone 👽")
+      data_poke = response.json()
+      return data_poke
+   elif response.status_code == 404:
+      print(f"Pokemon {poke_name} was not found.")
+   else: 
+      print(f"faild: {response.status_code}")
+
+def main():
+ poke_name = input("Enter the name of pokemon: ").lower()
+ pokemon_info = Get_poke_info(poke_name)
+ if pokemon_info:
+   print(f"Name :{pokemon_info["name"]}")
+   print(f"ID : {pokemon_info["id"]}")
+   print(f"Height : {pokemon_info["height"]}")
+   print(f"Weight : {pokemon_info["Weight"]}")
+   print(f"Base Experience : {pokemon_info["Base_Experience"]}")
+ else:
+      print("data not found")
+main()
